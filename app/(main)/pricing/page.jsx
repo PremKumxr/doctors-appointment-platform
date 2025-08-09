@@ -1,55 +1,71 @@
-import { redirect } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, CreditCard, Shield, Check } from "lucide-react";
-import { PricingTable } from "@clerk/nextjs";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import Pricing from "@/components/pricing";
+// components/pricing.jsx
+export default function Pricing() {
+  const plans = [
+    {
+      name: "Basic Consultation",
+      price: "$25",
+      duration: "30 minutes",
+      features: ["General health check", "Video call", "Follow-up notes"],
+      popular: false,
+    },
+    {
+      name: "Standard Care",
+      price: "$50",
+      duration: "60 minutes",
+      features: ["Full diagnosis", "Video call", "Prescription", "Follow-up email"],
+      popular: true,
+    },
+    {
+      name: "Specialist Visit",
+      price: "$80",
+      duration: "45 minutes",
+      features: ["Specialist consultation", "Video call", "Report", "2-day follow-up"],
+      popular: false,
+    },
+  ];
 
-export default async function PricingPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      {/* Header Section */}
-      <div className="flex justify-start mb-2">
-        <Link
-          href="/"
-          className="flex items-center text-muted-foreground hover:text-white transition-colors"
+    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {plans.map((plan, index) => (
+        <div
+          key={index}
+          className={`relative bg-gray-900 border rounded-lg p-6 ${
+            plan.popular
+              ? "border-emerald-500 shadow-lg shadow-emerald-500/10 transform scale-105"
+              : "border-gray-700"
+          }`}
         >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Home
-        </Link>
-      </div>
+          {plan.popular && (
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span className="bg-emerald-500 text-black text-xs font-bold px-3 py-1 rounded-full">
+                Popular
+              </span>
+            </div>
+          )}
 
-      <div className="max-w-full mx-auto mb-12 text-center">
-        <Badge
-          variant="outline"
-          className="bg-emerald-900/30 border-emerald-700/30 px-4 py-1 text-emerald-400 text-sm font-medium mb-4"
-        >
-          Affordable Healthcare
-        </Badge>
+          <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
+          <div className="text-3xl font-bold text-white mb-2">{plan.price}</div>
+          <div className="text-sm text-gray-400 mb-4">{plan.duration}</div>
 
-        <h1 className="text-4xl md:text-5xl font-bold gradient-title mb-4">
-          Simple, Transparent Pricing
-        </h1>
+          <ul className="space-y-2 mb-6">
+            {plan.features.map((feature, i) => (
+              <li key={i} className="flex items-center text-sm text-gray-300">
+                <Check className="h-4 w-4 mr-2 text-emerald-500" /> {feature}
+              </li>
+            ))}
+          </ul>
 
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Choose the perfect consultation package that fits your healthcare
-          needs with no hidden fees or long-term commitments
-        </p>
-      </div>
-
-      {/* Pricing Table Section */}
-      <Pricing />
-
-      {/* FAQ Section - Optional */}
-      <div className="max-w-3xl mx-auto mt-16 text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">
-          Questions? We're Here to Help
-        </h2>
-        <p className="text-muted-foreground mb-4">
-          Contact our support team at support@medimeet.com
-        </p>
-      </div>
+          <button
+            className={`w-full py-2 px-4 rounded text-sm font-medium transition ${
+              plan.popular
+                ? "bg-white text-black hover:bg-gray-200"
+                : "bg-gray-800 text-white border border-gray-600 hover:bg-gray-700"
+            }`}
+          >
+            Book Now
+          </button>
+        </div>
+      ))}
     </div>
   );
 }
