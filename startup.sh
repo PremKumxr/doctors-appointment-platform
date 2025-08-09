@@ -1,16 +1,20 @@
 #!/bin/bash
 
-# Navigate to the app directory
+set -x  # Enable command logging
+
 cd "$HOME/site/wwwroot"
 
-# Install dependencies
-echo "Installing Node.js dependencies..."
+echo "Node version:"
+node -v
+
+echo "NPM version:"
+npm -v
+
+echo "Installing dependencies..."
 npm install
 
-# Build the app
-echo "Running 'next build'..."
+echo "Building app..."
 npm run build
 
-# Start the app
-echo "Starting server with 'npm start'..."
+echo "Starting server..."
 npm start
