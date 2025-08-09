@@ -1,20 +1,7 @@
 #!/bin/bash
 
-set -x  # Enable command logging
+# Correct path
+cd /home/site/wwwroot
 
-cd "$HOME/site/wwwroot"
-
-echo "Node version:"
-node -v
-
-echo "NPM version:"
-npm -v
-
-echo "Installing dependencies..."
-npm install
-
-echo "Building app..."
-npm run build
-
-echo "Starting server..."
+echo "Starting Next.js server..."
 npm start

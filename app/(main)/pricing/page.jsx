@@ -1,4 +1,5 @@
 // components/pricing.jsx
+import { Check } from "lucide-react";
 export default function Pricing() {
   const plans = [
     {
