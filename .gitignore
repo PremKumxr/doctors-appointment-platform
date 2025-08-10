@@ -13,10 +13,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/*
-!.next
-/out/
+# Ignore everything in .next except the folder itself
+.next/*
+!.next/.gitkeep
 
 # production
 /build
